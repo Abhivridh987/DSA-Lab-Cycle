@@ -14,20 +14,20 @@ struct Node* tail = NULL;
 void serve_customer(){
     if(head == NULL)
     {
-        printf("No customer to serve\n\n");
+        printf("\n\nNo customer to serve\n\n");
     }
     else if(head == tail){
         free(head);
         free(tail);
         head = NULL;
         tail = NULL;
-        printf("Customer Served Successfully\n\n");
+        printf("\n\nCustomer Served Successfully\n\n");
     }
     else if(head->no_of_tickets <= 1){
         struct Node* temp_head = head;
         head = head->next;
         free(temp_head);
-        printf("Customer Served Successfully\n\n");
+        printf("\n\nCustomer Served Successfully\n\n");
 
     }
     else{
@@ -35,7 +35,7 @@ void serve_customer(){
         head = head->next;
         enter_customer(temp_head->name, (temp_head->no_of_tickets - 1));
         free(temp_head);
-        printf("Customer Served Successfully\n\n");
+        printf("\n\nCustomer Served Successfully\n\n");
     }
 }
 
@@ -61,9 +61,23 @@ void enter_customer(char name[], int tickets){
 
 
 }
-
+void display_current_ticket()
+{
+    if(head != NULL)
+    {
+        printf("\n\nName : %s    Tickets : %d\n\n", head->name, head->no_of_tickets);
+    }
+    else{
+        printf("\n\nNo customers\n\n");
+    }
+}
 void display_tickets(){
+    if(head == NULL ){
+        printf("\n\nNo customers\n\n");
+        return;
+    }
     struct Node* temp = head;
+    printf("\n\n");
     while(temp!=NULL){
         printf("Name : %s    No of tickets : %d\n",temp->name, temp->no_of_tickets);
         temp = temp->next;
@@ -77,7 +91,7 @@ int main()
     int loop = 1;
     while(loop == 1){
 
-        printf("1. Enter new customer\n2. Serve Ticket to customer\n3. Display tickets\n4. Exit");
+        printf("1. Enter new customer\n2. Serve Ticket to customer\n3. Display tickets\n4. Display Current Ticket\n5. Exit");
         printf("\n\nEnter choice : " );
         scanf(" %d", &choice);
         if(choice == 1)
@@ -99,6 +113,8 @@ int main()
         else if(choice == 3)
             display_tickets();
         else if(choice == 4)
+            display_current_ticket();
+        else if(choice == 5)
             return 0;
 
 
